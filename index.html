@@ -17,7 +17,7 @@
         }
 
         body {
-            background-image: url('https://i.imgur.com/aTTBwD8.png'); /* <<< Substitua pela URL da sua imagem de fundo do Fortnite! */
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/Fortnite_Battle_Royale_logo.png'); /* <<< Substitua pela URL da sua imagem de fundo do Fortnite! */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -181,3 +181,152 @@
             padding: 10px 20px;
             border-radius: 8px;
             display: inline-block;
+            letter-spacing: 3px;
+            text-shadow: none; /* Remover sombra para o código */
+        }
+    </style>
+</head>
+<body>
+    <div id="game-wrapper">
+        <h1>BEM-VINDO AO DESAFIO FORTNITE DA KÁTIA!</h1>
+        <p>Prepare-se para batalhar com 6 charadas sobre a sua vida. Cada acerto te leva para a próxima fase da vitória!</p>
+        <hr style="border-color: var(--fortnite-blue); margin-top: 20px; margin-bottom: 30px;">
+        
+        <div id="game-area">
+            </div>
+
+        <div id="input-controls" style="margin-top: 30px;">
+            <input type="text" id="user-answer" placeholder="Digite sua resposta aqui..." onkeydown="if(event.key === 'Enter') checkAnswer()">
+            <button onclick="checkAnswer()">Enviar Resposta</button>
+            <button id="hint-button" onclick="revealHint()">Precisa de Dica?</button>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+
+        <script>
+            // --- EDIÇÃO AQUI: SUAS CHARADAS PERSONALIZADAS ---
+            const charadas = [
+                { 
+                    pergunta: "Qual é a sua cor favorita? Aquela que te faz sentir pronta para qualquer desafio, como um novo lançamento de skin?", 
+                    resposta: "azul", 
+                    dica: "Pode ser a cor do céu ou do mar."
+                },
+                { 
+                    pergunta: "Seu 'drop point' perfeito para relaxar e recarregar as energias após um dia de trabalho. Onde é?", 
+                    resposta: "casa", 
+                    dica: "É o lugar onde você encontra seu 'loot' mais precioso: sua família."
+                },
+                { 
+                    pergunta: "Qual é o 'emoji' ou expressão que melhor descreve seu humor antes do primeiro café da manhã?", 
+                    resposta: "sono", 
+                    dica: "É o que a gente sente quando acorda muito cedo."
+                },
+                { 
+                    pergunta: "Qual habilidade secreta você tem que não está no seu currículo, mas te ajuda a vencer no dia a dia (fora do trabalho)?", 
+                    resposta: "cozinhar", 
+                    dica: "Envolve ingredientes e panelas, e o resultado é delicioso."
+                },
+                { 
+                    pergunta: "Se sua vida fosse um 'battle royale', qual seria o item mais essencial do seu inventário (não um celular ou dinheiro)?", 
+                    resposta: "humor", 
+                    dica: "É o que te faz rir e ver o lado bom das coisas."
+                },
+                { 
+                    pergunta: "Qual é a próxima 'temporada' da vida que você está mais ansiosa para desbloquear ou vivenciar?", 
+                    resposta: "viagem", 
+                    dica: "É quando exploramos novos lugares e culturas."
+                }
+            ];
+            // --- FIM DA ÁREA DE EDIÇÃO DAS CHARADAS ---
+
+            // --- EDIÇÃO AQUI: SEU CÓDIGO DE V-BUCKS ---
+            const codigoVbucks = "K4TIA-B4TTL3-R0Y4L3-2024"; // <<< INSIRA O CÓDIGO REAL AQUI!
+            // --- FIM DA ÁREA DE EDIÇÃO DO CÓDIGO DE V-BUCKS ---
+
+
+            let faseAtual = 0;
+            const gameArea = document.getElementById('game-area');
+            const feedbackDiv = document.getElementById('feedback');
+            const inputAnswer = document.getElementById('user-answer');
+            const inputControls = document.getElementById('input-controls');
+
+            function iniciarJogo() {
+                mostrarCharada(faseAtual);
+            }
+
+            function mostrarCharada(indice) {
+                if (indice < charadas.length) {
+                    gameArea.innerHTML = `
+                        <div class="charada-box">
+                            <h2>🏆 Desafio ${indice + 1} de ${charadas.length} 🏆</h2>
+                            <p>${charadas[indice].pergunta}</p>
+                        </div>
+                    `;
+                    feedbackDiv.style.display = 'none'; // Esconde feedback anterior
+                    inputAnswer.value = '';
+                    inputAnswer.focus();
+                } else {
+                    mostrarMensagemFinal();
+                }
+            }
+
+            function checkAnswer() {
+                const respostaUsuario = inputAnswer.value.trim().toLowerCase();
+                const respostaCorreta = charadas[faseAtual].resposta.toLowerCase();
+
+                if (respostaUsuario === respostaCorreta) {
+                    feedbackDiv.className = 'feedback correct';
+                    feedbackDiv.innerHTML = '✅ Resposta CORRETA! Bom trabalho, Guerreira!';
+                    
+                    setTimeout(() => {
+                        faseAtual++;
+                        mostrarCharada(faseAtual);
+                    }, 1500);
+
+                } else {
+                    feedbackDiv.className = 'feedback incorrect';
+                    feedbackDiv.innerHTML = '❌ Resposta INCORRETA. Tente novamente, a vitória está próxima!';
+                    inputAnswer.value = '';
+                    inputAnswer.focus();
+                }
+            }
+            
+            function revealHint() {
+                const dica = charadas[faseAtual].dica;
+                feedbackDiv.className = 'feedback hint-text';
+                feedbackDiv.innerHTML = `🌟 **DICA:** ${dica}`;
+                inputAnswer.focus();
+            }
+
+            function mostrarMensagemFinal() {
+                gameArea.innerHTML = `
+                    <div class="final-message">
+                        <h2>##################################</h2>
+                        <h2>🎉 P A R A B É N S &nbsp; K Á T I A ! 🎉</h2>
+                        <h2>##################################</h2>
+                        
+                        <p style="color: var(--fortnite-light); font-size: 1.5em; text-shadow: 2px 2px 3px rgba(0,0,0,0.7);">* A EQUIPE DE MARKETING TEM UM COMUNICADO EXCLUSIVO PARA VOCÊ! *</p>
+                        
+                        <p><strong>Kátia, a Estrategista que Conecta Resultados!</strong></p>
+                        <p>No seu grande dia, celebramos a nossa melhor 'KPI' - a sua **Kátia Performance Individual**! Você é a força motriz por trás de cada campanha de sucesso e a prova de que 'brand awareness' não é só sobre o produto, é sobre a **paixão** que você entrega.</p>
+                        <p>Que o seu novo ciclo seja um lançamento com 100% de aceitação no mercado da felicidade, gerando 'leads' ilimitados de alegria e um 'ROI' absurdo em momentos inesquecíveis.</p>
+                        <p><strong>Você é a nossa campanha de maior sucesso!</strong></p>
+                        <p>Feliz Aniversário! Com carinho,<br> Sua Equipe de Marketing.</p>
+
+                        <div class="vbuck-code-section">
+                            <p>AQUI ESTÁ SEU CÓDIGO DO VBUCK:</p>
+                            <span class="vbuck-code">${codigoVbucks}</span>
+                            <p style="font-size: 0.9em; margin-top: 15px; color: #CCC;">(Lembre-se de resgatar este código no site oficial do Fortnite)</p>
+                        </div>
+                    </div>
+                `;
+                inputControls.style.display = 'none'; // Esconde a área de input e botões
+                feedbackDiv.style.display = 'none'; // Garante que o feedback não apareça na tela final
+            }
+
+            // Inicia o jogo quando a página carrega
+            iniciarJogo();
+        </script>
+    </div>
+</body>
+</html>

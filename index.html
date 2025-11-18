@@ -6,185 +6,219 @@
     <title>Desafio Fortnite da Kátia!</title>
     <link href="https://fonts.googleapis.com/css2?family=Burbank+Big+Condensed+Bold&display=swap" rel="stylesheet">
     <style>
-        /* Variáveis de Cores Fortnite */
-        :root {
-            --fortnite-blue: #007bff; /* Azul primário */
-            --fortnite-green: #28a745; /* Verde para sucesso */
-            --fortnite-orange: #ffc107; /* Laranja para destaque */
-            --fortnite-red: #dc3545; /* Vermelho para erro */
-            --fortnite-dark: #212529; /* Preto/Cinza escuro */
-            --fortnite-light: #f8f9fa; /* Branco/Claro */
-        }
+    /* Variáveis de Cores Neon Futurista */
+    :root {
+        --neon-pink: #FF0099;     /* Magenta Vibrante */
+        --neon-cyan: #00FFFF;     /* Ciano Elétrico */
+        --neon-green: #39FF14;    /* Verde Elétrico (Títulos/Sucesso) */
+        --neon-dark: #0F0F0F;     /* Fundo Super Escuro */
+        --neon-light: #F0F8FF;    /* Branco/Azul Claro */
+        --neon-blue: #0077FF;     /* Azul Profundo */
+        --shadow-glow: 0 0 8px rgba(255, 0, 153, 0.8), 0 0 15px rgba(0, 255, 255, 0.5); /* Sombra de Neon Geral */
+    }
 
-        body {
-            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/Fortnite_Battle_Royale_logo.png'); /* <<< Substitua pela URL da sua imagem de fundo do Fortnite! */
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            font-family: 'Burbank Big Condensed Bold', Impact, sans-serif; /* Fonte estilo Fortnite */
-            color: var(--fortnite-light);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para o texto se destacar no fundo */
-            padding: 20px;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            text-align: center;
-        }
+    body {
+        /* Fundo com Imagem da Bananinha - SUBSTITUA ESTA URL! */
+        background-image: url('https://i.imgur.com/exemplo-bananinha-peely.jpg'); 
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        font-family: 'Burbank Big Condensed Bold', Impact, sans-serif;
+        color: var(--neon-cyan);
+        text-shadow: 0 0 3px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 255, 255, 0.4);
+        padding: 20px;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        text-align: center;
+    }
 
-        #game-wrapper {
-            background-color: rgba(33, 37, 41, 0.9); /* Fundo escuro semi-transparente para o conteúdo */
-            border: 5px solid var(--fortnite-orange);
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
-            max-width: 700px;
-            width: 100%;
-            animation: fadeIn 1s ease-out;
-        }
+    #game-wrapper {
+        background-color: rgba(15, 15, 15, 0.95); /* Fundo super escuro semi-transparente */
+        border: 4px solid var(--neon-pink);
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: var(--shadow-glow);
+        max-width: 750px;
+        width: 100%;
+        animation: fadeIn 1s ease-out;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
 
-        h1, h2 {
-            color: var(--fortnite-orange);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 20px;
-            font-size: 2.5em;
-        }
+    h1 {
+        color: var(--neon-green);
+        text-transform: uppercase;
+        letter-spacing: 3px;
+        margin-bottom: 30px;
+        font-size: 2.8em;
+        text-shadow: 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+    }
+    
+    h2 {
+        color: var(--neon-cyan);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 15px;
+        font-size: 2.2em;
+    }
 
-        p {
-            font-size: 1.2em;
-            line-height: 1.6;
-        }
+    p {
+        font-size: 1.2em;
+        line-height: 1.6;
+        color: var(--neon-light);
+    }
 
-        .charada-box {
-            background-color: var(--fortnite-dark);
-            border: 3px solid var(--fortnite-blue);
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 25px;
-            animation: slideIn 0.8s ease-out;
-        }
+    .charada-box {
+        background-color: var(--neon-dark);
+        border: 2px solid var(--neon-cyan);
+        border-radius: 12px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+        animation: slideIn 0.8s ease-out;
+    }
 
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateX(-50px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
+    @keyframes slideIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
 
-        input[type="text"] {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--fortnite-light);
-            border: 2px solid var(--fortnite-blue);
-            border-radius: 8px;
-            padding: 12px 15px;
-            font-family: inherit;
-            font-size: 1.1em;
-            width: calc(100% - 150px); /* Ajusta a largura */
-            margin-top: 15px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
+    input[type="text"] {
+        background-color: rgba(255, 255, 255, 0.05);
+        color: var(--neon-light);
+        border: 2px solid var(--neon-blue);
+        border-radius: 10px;
+        padding: 15px 20px;
+        font-family: inherit;
+        font-size: 1.1em;
+        width: calc(100% - 150px);
+        margin-top: 20px;
+        outline: none;
+        transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
 
-        input[type="text"]:focus {
-            border-color: var(--fortnite-orange);
-        }
+    input[type="text"]:focus {
+        border-color: var(--neon-pink);
+        box-shadow: 0 0 10px var(--neon-pink);
+    }
 
-        button {
-            background-color: var(--fortnite-blue);
-            color: var(--fortnite-light);
-            border: none;
-            border-radius: 8px;
-            padding: 12px 25px;
-            font-family: inherit;
-            font-size: 1.1em;
-            text-transform: uppercase;
-            cursor: pointer;
-            margin-left: 10px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
+    button {
+        background-color: var(--neon-pink);
+        color: var(--neon-dark);
+        border: none;
+        border-radius: 10px;
+        padding: 12px 28px;
+        font-family: inherit;
+        font-size: 1.1em;
+        text-transform: uppercase;
+        cursor: pointer;
+        margin-left: 10px;
+        transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+        box-shadow: 0 0 10px var(--neon-pink);
+        font-weight: bold;
+    }
 
-        button:hover {
-            background-color: var(--fortnite-orange);
-            transform: translateY(-2px);
-        }
+    button:hover {
+        background-color: var(--neon-cyan);
+        color: var(--neon-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 0 15px var(--neon-cyan);
+    }
 
-        button:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        }
+    #hint-button {
+        background-color: var(--neon-blue);
+        box-shadow: 0 0 10px var(--neon-blue);
+    }
 
-        #hint-button {
-            background-color: var(--fortnite-green);
-        }
+    #hint-button:hover {
+        background-color: var(--neon-pink);
+    }
 
-        #hint-button:hover {
-            background-color: var(--fortnite-blue);
-        }
+    .feedback {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 1.1em;
+        font-weight: bold;
+        display: none;
+    }
+    .correct { 
+        background-color: rgba(57, 255, 20, 0.2); 
+        border: 1px solid var(--neon-green); 
+        color: var(--neon-green); 
+        text-shadow: 0 0 5px var(--neon-green);
+        display: block; 
+    }
+    .incorrect { 
+        background-color: rgba(255, 0, 153, 0.2); 
+        border: 1px solid var(--neon-pink); 
+        color: var(--neon-pink); 
+        text-shadow: 0 0 5px var(--neon-pink);
+        display: block; 
+    }
+    .hint-text { 
+        background-color: rgba(0, 255, 255, 0.2); 
+        border: 1px solid var(--neon-cyan); 
+        color: var(--neon-cyan); 
+        text-shadow: 0 0 5px var(--neon-cyan);
+        display: block; 
+    }
 
-        .feedback {
-            margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: bold;
-            display: none; /* Inicia oculto */
-        }
-        .correct { background-color: rgba(40, 167, 69, 0.8); color: var(--fortnite-light); display: block; }
-        .incorrect { background-color: rgba(220, 53, 69, 0.8); color: var(--fortnite-light); display: block; }
-        .hint-text { background-color: rgba(0, 123, 255, 0.8); color: var(--fortnite-light); display: block; }
+    .final-message {
+        background-color: rgba(0, 128, 0, 0.95);
+        color: var(--neon-light);
+        padding: 30px;
+        text-align: center;
+        border: 7px double var(--neon-green);
+        border-radius: 25px;
+        font-size: 1.3em;
+        line-height: 1.8;
+        box-shadow: 0 0 30px rgba(57, 255, 20, 0.8);
+        margin-top: 30px;
+    }
 
-        .final-message {
-            background-color: rgba(0, 128, 0, 0.95); /* Verde mais escuro para a mensagem final */
-            color: var(--fortnite-light);
-            padding: 30px;
-            text-align: center;
-            border: 7px double var(--fortnite-orange);
-            border-radius: 20px;
-            font-size: 1.3em;
-            line-height: 1.8;
-            box-shadow: 0 0 30px rgba(255, 193, 7, 0.7);
-            margin-top: 30px;
-        }
+    .final-message h2 {
+        font-size: 3.2em;
+        color: var(--neon-pink); 
+        text-shadow: 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink);
+        margin-bottom: 20px;
+    }
 
-        .final-message h2 {
-            font-size: 3em;
-            color: var(--fortnite-light); /* Kátia em branco para contraste */
-            text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.9);
-            margin-bottom: 20px;
-        }
+    .vbuck-code-section {
+        background-color: var(--neon-dark);
+        border: 3px solid var(--neon-green);
+        border-radius: 15px;
+        padding: 25px;
+        margin-top: 30px;
+        box-shadow: 0 0 20px var(--neon-green);
+    }
 
-        .vbuck-code-section {
-            background-color: var(--fortnite-dark);
-            border: 3px solid var(--fortnite-green);
-            border-radius: 10px;
-            padding: 20px;
-            margin-top: 30px;
-            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
-        }
+    .vbuck-code-section p {
+        font-size: 1.6em;
+        color: var(--neon-cyan);
+        margin-bottom: 15px;
+        text-shadow: 0 0 8px var(--neon-cyan);
+    }
 
-        .vbuck-code-section p {
-            font-size: 1.5em;
-            color: var(--fortnite-orange);
-            margin-bottom: 10px;
-        }
-
-        .vbuck-code {
-            font-size: 2em;
-            color: var(--fortnite-light);
-            background-color: var(--fortnite-blue);
-            padding: 10px 20px;
-            border-radius: 8px;
-            display: inline-block;
-            letter-spacing: 3px;
-            text-shadow: none; /* Remover sombra para o código */
-        }
-    </style>
+    .vbuck-code {
+        font-size: 2.2em;
+        color: var(--neon-dark);
+        background-color: var(--neon-green);
+        padding: 12px 30px;
+        border-radius: 10px;
+        display: inline-block;
+        letter-spacing: 5px;
+        font-weight: bold;
+        text-shadow: none; 
+        box-shadow: 0 0 15px var(--neon-green);
+    }
+</style>
 </head>
 <body>
     <div id="game-wrapper">

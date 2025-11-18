@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Charadas da Kátia</title>
+    <style>
+        /* Estilo para simular o visual do CMD */
+        body {
+            background-color: #000;
+            color: #00FF00; /* Cor verde brilhante */
+            font-family: 'Consolas', 'Courier New', monospace;
+            padding: 20px;
+            font-size: 1.1em;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        #container {
+            width: 100%;
+            max-width: 600px;
+        }
+        h2 {
+            color: #FFFF00; /* Amarelo para títulos */
+            border-bottom: 1px solid #00FF00;
+            padding-bottom: 5px;
+        }
+        input[type="text"] {
+            background-color: #000;
+            color: #00FF00;
+            border: 1px solid #00FF00;
+            padding: 5px;
+            font-family: inherit;
+            font-size: 1em;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #00FF00;
+            color: #000;
+            border: none;
+            padding: 8px 15px;
+            font-family: inherit;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border: 1px solid #333;
+        }
+        .correct { color: #32CD32; } /* Verde-limão */
+        .incorrect { color: #FF4500; } /* Laranja avermelhado */
+        .final-message {
+            background-color: #008000;
+            color: #FFF;
+            padding: 20px;
+            text-align: center;
+            border: 5px double #FFFF00;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Bem-vindo ao Jogo de Charadas!</h1>
+        <p>Você deve acertar as três charadas para liberar a mensagem final.</p>
+        <hr style="border-color: #00FF00;">
+        
+        <div id="game-area">
+            </div>
+
+        <div id="input-area" style="margin-top: 20px;">
+            <label for="user-answer">Sua resposta:</label>
+            <input type="text" id="user-answer" onkeydown="if(event.key === 'Enter') checkAnswer()">
+            <button onclick="checkAnswer()">Enviar</button>
+            <button onclick="revealHint()">Dica</button>
+        </div>
+
+        <div id="feedback" class="feedback"></div>
+
+        <script>
+            // --- Configuração das Charadas ---
+            const charadas = [
+                { 
+                    pergunta: "O que é que está sempre à sua frente, mas nunca pode ser visto?", 
+                    resposta: "futuro", 
+                    dica: "É algo que está por vir."
+                },
+                { 
+                    pergunta: "Tenho cidades, mas não tenho casas. Tenho montanhas, mas não tenho árvores. Tenho água, mas não tenho peixes. O que eu sou?", 
+                    resposta: "mapa", 
+                    dica: "Você me usa para se orientar em viagens."
+                },
+                { 
+                    pergunta: "O que é que, quanto mais se tira, maior fica?", 
+                    resposta: "buraco", 
+                    dica: "É uma coisa vazia."
+                }
+            ];
+
+            let faseAtual = 0;
+            const gameArea = document.getElementById('game-area');
+            const feedbackDiv = document.getElementById('feedback');
+            const inputAnswer = document.getElementById('user-answer');
+            const inputArea = document.getElementById('input-area');
+
+            function iniciarJogo() {
+                mostrarCharada(faseAtual);
+            }
+
+            function mostrarCharada(indice) {
+                if (indice < charadas.length) {
+                    gameArea.innerHTML = `
+                        <h2>🤔 Charada ${indice + 1} de ${charadas.length} 🤔</h2>
+                        <p>${charadas[indice].pergunta}</p>
+                    `;
+                    feedbackDiv.innerHTML = '';
+                    inputAnswer.value = '';
+                    inputAnswer.focus();
+                } else {
+                    mostrarMensagemFinal();
+                }
+            }
+
+            function checkAnswer() {
+                const respostaUsuario = inputAnswer.value.trim().toLowerCase();
+                const respostaCorreta = charadas[faseAtual].resposta;
+
+                if (respostaUsuario === respostaCorreta) {
+                    feedbackDiv.className = 'feedback correct';
+                    feedbackDiv.innerHTML = '✅ Resposta Correta! Você pode ir para a próxima fase.';
+                    
+                    // Avança para a próxima fase após um breve atraso
+                    setTimeout(() => {
+                        faseAtual++;
+                        mostrarCharada(faseAtual);
+                    }, 1500);
+
+                } else if (respostaUsuario === 'dica') {
+                    revealHint(); // Se o usuário digitar "dica", mostra a dica
+                } else {
+                    feedbackDiv.className = 'feedback incorrect';
+                    feedbackDiv.innerHTML = '❌ Resposta Incorreta. Tente novamente.';
+                    inputAnswer.value = '';
+                    inputAnswer.focus();
+                }
+            }
+            
+            function revealHint() {
+                const dica = charadas[faseAtual].dica;
+                feedbackDiv.className = 'feedback';
+                feedbackDiv.innerHTML = `* Dica Revelada: **${dica}** *`;
+                inputAnswer.focus();
+            }
+
+            function mostrarMensagemFinal() {
+                gameArea.innerHTML = `
+                    <div class="final-message">
+                        <h2>##################################</h2>
+                        <h2>🎉 P A R A B É N S &nbsp; K Á T I A ! 🎉</h2>
+                        <h2>##################################</h2>
+                        
+                        <p style="color: #FFFF00;">* A EQUIPE DE MARKETING TEM UM COMUNICADO PARA VOCÊ! *</p>
+                        
+                        <p><strong>Kátia, a Estrategista que Conecta Resultados!</strong></p>
+                        <p>No seu grande dia, celebramos a nossa melhor 'KPI' - a sua **Kátia Performance Individual**! Você é a força motriz por trás de cada campanha de sucesso e a prova de que 'brand awareness' não é só sobre o produto, é sobre a **paixão** que você entrega.</p>
+                        <p>Que o seu novo ciclo seja um lançamento com 100% de aceitação no mercado da felicidade, gerando 'leads' ilimitados de alegria e um 'ROI' absurdo em momentos inesquecíveis.</p>
+                        <p><strong>Você é a nossa campanha de maior sucesso!</strong></p>
+                        <p>Feliz Aniversário! Com carinho,<br> Sua Equipe de Marketing.</p>
+                    </div>
+                `;
+                inputArea.style.display = 'none'; // Esconde a área de input
+            }
+
+            // Inicia o jogo quando a página carrega
+            iniciarJogo();
+        </script>
+    </div>
+</body>
+</html>

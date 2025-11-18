@@ -3,182 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo de Charadas da Kátia</title>
+    <title>Desafio Fortnite da Kátia!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Burbank+Big+Condensed+Bold&display=swap" rel="stylesheet">
     <style>
-        /* Estilo para simular o visual do CMD */
+        /* Variáveis de Cores Fortnite */
+        :root {
+            --fortnite-blue: #007bff; /* Azul primário */
+            --fortnite-green: #28a745; /* Verde para sucesso */
+            --fortnite-orange: #ffc107; /* Laranja para destaque */
+            --fortnite-red: #dc3545; /* Vermelho para erro */
+            --fortnite-dark: #212529; /* Preto/Cinza escuro */
+            --fortnite-light: #f8f9fa; /* Branco/Claro */
+        }
+
         body {
-            background-color: #000;
-            color: #00FF00; /* Cor verde brilhante */
-            font-family: 'Consolas', 'Courier New', monospace;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/e/ec/Fortnite_Battle_Royale_logo.png'); /* <<< Substitua pela URL da sua imagem de fundo do Fortnite! */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            font-family: 'Burbank Big Condensed Bold', Impact, sans-serif; /* Fonte estilo Fortnite */
+            color: var(--fortnite-light);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Sombra para o texto se destacar no fundo */
             padding: 20px;
-            font-size: 1.1em;
             margin: 0;
             display: flex;
             justify-content: center;
-            align-items: flex-start;
+            align-items: center;
             min-height: 100vh;
+            text-align: center;
         }
-        #container {
+
+        #game-wrapper {
+            background-color: rgba(33, 37, 41, 0.9); /* Fundo escuro semi-transparente para o conteúdo */
+            border: 5px solid var(--fortnite-orange);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+            max-width: 700px;
             width: 100%;
-            max-width: 600px;
+            animation: fadeIn 1s ease-out;
         }
-        h2 {
-            color: #FFFF00; /* Amarelo para títulos */
-            border-bottom: 1px solid #00FF00;
-            padding-bottom: 5px;
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
+        h1, h2 {
+            color: var(--fortnite-orange);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            font-size: 2.5em;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+
+        .charada-box {
+            background-color: var(--fortnite-dark);
+            border: 3px solid var(--fortnite-blue);
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 25px;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
         input[type="text"] {
-            background-color: #000;
-            color: #00FF00;
-            border: 1px solid #00FF00;
-            padding: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--fortnite-light);
+            border: 2px solid var(--fortnite-blue);
+            border-radius: 8px;
+            padding: 12px 15px;
             font-family: inherit;
-            font-size: 1em;
-            width: 100%;
-            box-sizing: border-box;
-            margin-top: 10px;
+            font-size: 1.1em;
+            width: calc(100% - 150px); /* Ajusta a largura */
+            margin-top: 15px;
+            outline: none;
+            transition: border-color 0.3s ease;
         }
+
+        input[type="text"]:focus {
+            border-color: var(--fortnite-orange);
+        }
+
         button {
-            background-color: #00FF00;
-            color: #000;
+            background-color: var(--fortnite-blue);
+            color: var(--fortnite-light);
             border: none;
-            padding: 8px 15px;
+            border-radius: 8px;
+            padding: 12px 25px;
             font-family: inherit;
+            font-size: 1.1em;
+            text-transform: uppercase;
             cursor: pointer;
             margin-left: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
         }
+
+        button:hover {
+            background-color: var(--fortnite-orange);
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #hint-button {
+            background-color: var(--fortnite-green);
+        }
+
+        #hint-button:hover {
+            background-color: var(--fortnite-blue);
+        }
+
         .feedback {
-            margin-top: 15px;
-            padding: 10px;
-            border: 1px solid #333;
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: bold;
+            display: none; /* Inicia oculto */
         }
-        .correct { color: #32CD32; } /* Verde-limão */
-        .incorrect { color: #FF4500; } /* Laranja avermelhado */
+        .correct { background-color: rgba(40, 167, 69, 0.8); color: var(--fortnite-light); display: block; }
+        .incorrect { background-color: rgba(220, 53, 69, 0.8); color: var(--fortnite-light); display: block; }
+        .hint-text { background-color: rgba(0, 123, 255, 0.8); color: var(--fortnite-light); display: block; }
+
         .final-message {
-            background-color: #008000;
-            color: #FFF;
-            padding: 20px;
+            background-color: rgba(0, 128, 0, 0.95); /* Verde mais escuro para a mensagem final */
+            color: var(--fortnite-light);
+            padding: 30px;
             text-align: center;
-            border: 5px double #FFFF00;
-            font-size: 1.2em;
+            border: 7px double var(--fortnite-orange);
+            border-radius: 20px;
+            font-size: 1.3em;
+            line-height: 1.8;
+            box-shadow: 0 0 30px rgba(255, 193, 7, 0.7);
+            margin-top: 30px;
         }
-    </style>
-</head>
-<body>
-    <div id="container">
-        <h1>Bem-vindo ao Jogo de Charadas!</h1>
-        <p>Você deve acertar as três charadas para liberar a mensagem final.</p>
-        <hr style="border-color: #00FF00;">
-        
-        <div id="game-area">
-            </div>
 
-        <div id="input-area" style="margin-top: 20px;">
-            <label for="user-answer">Sua resposta:</label>
-            <input type="text" id="user-answer" onkeydown="if(event.key === 'Enter') checkAnswer()">
-            <button onclick="checkAnswer()">Enviar</button>
-            <button onclick="revealHint()">Dica</button>
-        </div>
+        .final-message h2 {
+            font-size: 3em;
+            color: var(--fortnite-light); /* Kátia em branco para contraste */
+            text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.9);
+            margin-bottom: 20px;
+        }
 
-        <div id="feedback" class="feedback"></div>
+        .vbuck-code-section {
+            background-color: var(--fortnite-dark);
+            border: 3px solid var(--fortnite-green);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 30px;
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.5);
+        }
 
-        <script>
-            // --- Configuração das Charadas ---
-            const charadas = [
-                { 
-                    pergunta: "O que é que está sempre à sua frente, mas nunca pode ser visto?", 
-                    resposta: "futuro", 
-                    dica: "É algo que está por vir."
-                },
-                { 
-                    pergunta: "Tenho cidades, mas não tenho casas. Tenho montanhas, mas não tenho árvores. Tenho água, mas não tenho peixes. O que eu sou?", 
-                    resposta: "mapa", 
-                    dica: "Você me usa para se orientar em viagens."
-                },
-                { 
-                    pergunta: "O que é que, quanto mais se tira, maior fica?", 
-                    resposta: "buraco", 
-                    dica: "É uma coisa vazia."
-                }
-            ];
+        .vbuck-code-section p {
+            font-size: 1.5em;
+            color: var(--fortnite-orange);
+            margin-bottom: 10px;
+        }
 
-            let faseAtual = 0;
-            const gameArea = document.getElementById('game-area');
-            const feedbackDiv = document.getElementById('feedback');
-            const inputAnswer = document.getElementById('user-answer');
-            const inputArea = document.getElementById('input-area');
-
-            function iniciarJogo() {
-                mostrarCharada(faseAtual);
-            }
-
-            function mostrarCharada(indice) {
-                if (indice < charadas.length) {
-                    gameArea.innerHTML = `
-                        <h2>🤔 Charada ${indice + 1} de ${charadas.length} 🤔</h2>
-                        <p>${charadas[indice].pergunta}</p>
-                    `;
-                    feedbackDiv.innerHTML = '';
-                    inputAnswer.value = '';
-                    inputAnswer.focus();
-                } else {
-                    mostrarMensagemFinal();
-                }
-            }
-
-            function checkAnswer() {
-                const respostaUsuario = inputAnswer.value.trim().toLowerCase();
-                const respostaCorreta = charadas[faseAtual].resposta;
-
-                if (respostaUsuario === respostaCorreta) {
-                    feedbackDiv.className = 'feedback correct';
-                    feedbackDiv.innerHTML = '✅ Resposta Correta! Você pode ir para a próxima fase.';
-                    
-                    // Avança para a próxima fase após um breve atraso
-                    setTimeout(() => {
-                        faseAtual++;
-                        mostrarCharada(faseAtual);
-                    }, 1500);
-
-                } else if (respostaUsuario === 'dica') {
-                    revealHint(); // Se o usuário digitar "dica", mostra a dica
-                } else {
-                    feedbackDiv.className = 'feedback incorrect';
-                    feedbackDiv.innerHTML = '❌ Resposta Incorreta. Tente novamente.';
-                    inputAnswer.value = '';
-                    inputAnswer.focus();
-                }
-            }
-            
-            function revealHint() {
-                const dica = charadas[faseAtual].dica;
-                feedbackDiv.className = 'feedback';
-                feedbackDiv.innerHTML = `* Dica Revelada: **${dica}** *`;
-                inputAnswer.focus();
-            }
-
-            function mostrarMensagemFinal() {
-                gameArea.innerHTML = `
-                    <div class="final-message">
-                        <h2>##################################</h2>
-                        <h2>🎉 P A R A B É N S &nbsp; K Á T I A ! 🎉</h2>
-                        <h2>##################################</h2>
-                        
-                        <p style="color: #FFFF00;">* A EQUIPE DE MARKETING TEM UM COMUNICADO PARA VOCÊ! *</p>
-                        
-                        <p><strong>Kátia, a Estrategista que Conecta Resultados!</strong></p>
-                        <p>No seu grande dia, celebramos a nossa melhor 'KPI' - a sua **Kátia Performance Individual**! Você é a força motriz por trás de cada campanha de sucesso e a prova de que 'brand awareness' não é só sobre o produto, é sobre a **paixão** que você entrega.</p>
-                        <p>Que o seu novo ciclo seja um lançamento com 100% de aceitação no mercado da felicidade, gerando 'leads' ilimitados de alegria e um 'ROI' absurdo em momentos inesquecíveis.</p>
-                        <p><strong>Você é a nossa campanha de maior sucesso!</strong></p>
-                        <p>Feliz Aniversário! Com carinho,<br> Sua Equipe de Marketing.</p>
-                    </div>
-                `;
-                inputArea.style.display = 'none'; // Esconde a área de input
-            }
-
-            // Inicia o jogo quando a página carrega
-            iniciarJogo();
-        </script>
-    </div>
-</body>
-</html>
+        .vbuck-code {
+            font-size: 2em;
+            color: var(--fortnite-light);
+            background-color: var(--fortnite-blue);
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: inline-block;
